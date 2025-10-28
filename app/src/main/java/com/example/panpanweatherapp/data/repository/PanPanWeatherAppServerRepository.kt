@@ -1,6 +1,5 @@
 package com.example.panpanweatherapp.data.repository
 
-import com.example.panpanweatherapp.data.dto.IconResponse
 import com.example.panpanweatherapp.data.service.PanPanWeatherAppServerService
 import com.example.panpanweatherapp.ui.model.WeatherInfo
 
