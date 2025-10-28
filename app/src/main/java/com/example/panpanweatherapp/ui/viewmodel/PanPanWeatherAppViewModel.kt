@@ -34,7 +34,7 @@ class PanPanWeatherAppViewModel : ViewModel(){
                     errorResponse = null,
                     errorOccured = false
                 )
-                _weatherIcon.value = PanPanWeatherAppServerContainer().PanPanWeatherAppRepository.getWeatherIcon(result.weatherIconId).url
+                _weatherIcon.value = PanPanWeatherAppServerContainer().PanPanWeatherAppRepository.getWeatherIcon(result.weatherIconId)
             } catch (e : Exception){
                 _weather.value = _weather.value.copy(
                     errorResponse = "HTTP 404 Not Found",

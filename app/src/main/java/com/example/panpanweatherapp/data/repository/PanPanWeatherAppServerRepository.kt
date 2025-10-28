@@ -29,8 +29,8 @@ class PanPanWeatherAppServerRepository(private val service: PanPanWeatherAppServ
             errorResponse = null
         )
     }
-    fun getWeatherIcon(iconId: String): IconResponse{
+    fun getWeatherIcon(iconId: String): String{
         val url = "https://openweathermap.org/img/wn/${iconId}@2x.png"
-        return IconResponse(iconId, url)
+        return url
     }
 }
