@@ -22,6 +22,11 @@ class PanPanWeatherAppViewModel : ViewModel(){
     val weather: StateFlow<WeatherInfo> = _weather
     val weatherIcon: StateFlow<String?> = _weatherIcon
 
+    private fun formatTimestamp(timestamp: Int, pattern: String): String {
+        val date = Date(timestamp * 1000L)
+        return SimpleDateFormat(pattern, Locale("id")).format(date)
+    }
+
     fun searchCity(cityName: String){
         viewModelScope.launch {
             _weather.value = _weather.value.copy(
@@ -46,13 +51,11 @@ class PanPanWeatherAppViewModel : ViewModel(){
     }
 
     val formatedDate = weather.map {
-        val date = Date(it.time * 1000L)
-        SimpleDateFormat("MMMM dd", Locale("id")).format(date)
+        formatTimestamp(it.time, "MMMM dd")
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "")
 
     val formatedTime = weather.map {
-        val date = Date(it.time * 1000L)
-        SimpleDateFormat("HH:mm a", Locale("id")).format(date)
+        formatTimestamp(it.time, "HH:mm a")
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "")
 
     val listWeatherInfo = weather.map {
@@ -67,10 +70,10 @@ class PanPanWeatherAppViewModel : ViewModel(){
     }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val sunrieTime = weather.map {
-        SimpleDateFormat("HH:mm a", Locale("id")).format(Date(it.sunriseTime * 1000L))
+        formatTimestamp(it.sunriseTime, "HH:mm a")
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "")
 
     val sunsetTime = weather.map {
-        SimpleDateFormat("HH:mm a", Locale("id")).format(Date(it.sunsetTime * 1000L))
+        formatTimestamp(it.sunsetTime, "HH:mm a")
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "")
 }
